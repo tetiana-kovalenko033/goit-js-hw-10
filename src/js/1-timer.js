@@ -32,13 +32,13 @@ const options = {
                 messageSize: '30px',    
                 messageLineHeight: '1.5',     
                 theme: 'dark',
-                position: 'topCenter',       
+                position: 'topRight',       
                 backgroundColor: 'red',
          
             });
             startBtn.disabled = true;
         } else {  
-            // userSelectedDate = selectedDate;
+            
             startBtn.disabled = false;            
         }    
   },
@@ -53,16 +53,16 @@ function startTimer() {
     timeInterval = setInterval(() => {
 
         const startTime = Date.now();
-        const timeInterval = userSelectedDate - startTime;
+        const remainTime = userSelectedDate - startTime;
 
-        if (timeInterval <= 0) {
+        if (remainTime <= 0) {
             clearInterval(timeInterval);
             picker.disabled = false;
             startBtn.disabled = true;
              updateTimerDisplay(0, 0, 0, 0);
       return;
         }
-        const { days, hours, minutes, seconds } = convertMs(timeInterval);
+        const { days, hours, minutes, seconds } = convertMs(remainTime);
         updateTimerDisplay(days, hours, minutes, seconds);
 
     }, 1000);
@@ -77,8 +77,8 @@ function convertMs(ms) {
   const hour = minute * 60;
   const day = hour * 24;
 
-    const days = Math.floor(ms / day);
-  
+  const days = String(Math.floor(ms / day)).padStart(2, "0");  
+ 
   const hours = String(Math.floor((ms % day) / hour)).padStart(2, "0");
   
   const minutes = String(Math.floor(((ms % day) % hour) / minute)).padStart(2, "0");
@@ -96,6 +96,6 @@ function updateTimerDisplay(days, hours, minutes, seconds) {
 
 }
 
-    
+   
 
 
