@@ -59,7 +59,7 @@ function startTimer() {
             clearInterval(timeInterval);
             picker.disabled = false;
             startBtn.disabled = true;
-             updateTimerDisplay(0, 0, 0, 0);
+             updateTimerDisplay("00", "00", "00", "00");
       return;
         }
         const { days, hours, minutes, seconds } = convertMs(remainTime);
